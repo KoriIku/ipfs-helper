@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div id="ipfsAddGeneratorMode" class="container" v-show="isVisible">
       <textarea
         v-model="folderInput"
         placeholder="输入ipfs files ls -l '/'获得的值..."
@@ -25,75 +25,81 @@
   <script setup>
   import { ref } from 'vue';
   
+  const isVisible = ref(true); // 控制页面显示的状态
+  
   const folderInput = ref('');
   const filesInput = ref('');
   const outputAddCommands = ref('');
   
   const generateAddCommands = () => {
-    const folderLines = folderInput.value.trim().split('\n');
-    const filesLines = filesInput.value.trim().split('\n');
-    
-    let addCommands = [];
+    const folderLines = folderInput.value
+      .split('\n')
+      .filter(line => line.trim() !== '');
+    const fileLines = filesInput.value
+      .split('\n')
+      .filter(line => line.trim() !== '');
   
-    filesLines.forEach(line => {
-      const match = line.match(/(\S+)\s+(\S+)\s+(.*)$/);
-      if (match) {
-        const path = match[1];
-        const name = match[3];
-        addCommands.push(`ipfs add ${path} -r --cid-version=1 --name="${name}"`);
-      }
+    if (folderLines.length === 0 || fileLines.length === 0) {
+      alert('Please provide both folder and file inputs.');
+      return;
+    }
+  
+    const folderParts = folderLines[0].split(/\s+/);
+    let folderName = folderParts.slice(0, -2).join(' ').trim();
+    const folderCid = folderParts[folderParts.length - 2].trim();
+  
+    // Remove trailing slash from folder name if it exists
+    if (folderName.endsWith('/')) {
+      folderName = folderName.slice(0, -1);
+    }
+  
+    let output = '';
+  
+    fileLines.forEach(line => {
+      const fileParts = line.split(/\s+/);
+      const fileName = fileParts.slice(0, -2).join(' ').trim();
+      const fileCid = fileParts[fileParts.length - 2].trim();
+      output += `added ${fileCid} ${folderName}/${fileName}\n`;
     });
   
-    outputAddCommands.value = addCommands.join('\n');
+    output += `added ${folderCid} ${folderName}`;
+  
+    outputAddCommands.value = output;
   };
   
   const clearOutputAddCommands = () => {
+    folderInput.value = '';
+    filesInput.value = '';
     outputAddCommands.value = '';
   };
   
   const copyOutputAddCommands = () => {
-    navigator.clipboard.writeText(outputAddCommands.value)
-      .then(() => {
-        alert('Copied to clipboard');
-      })
-      .catch(err => {
-        console.error('Failed to copy: ', err);
-      });
+    const textarea = document.createElement('textarea');
+    textarea.value = outputAddCommands.value;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
   };
   
   const selectAll = (event) => {
-    const textarea = event.target;
-    textarea.select();
+    event.target.select();
   };
   </script>
   
   <style scoped>
+  /* 在此处添加你的样式 */
   .container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 800px;
+    /* 容器样式 */
   }
   
   textarea {
     width: 100%;
-    height: 150px;
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
+    margin-bottom: 10px;
   }
   
-  .buttons {
-    margin-top: 20px;
-  }
-  
-  button {
-    margin: 0 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
+  .buttons button {
+    margin-right: 10px;
   }
   </style>
   
