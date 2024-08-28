@@ -4,10 +4,10 @@
       <h1>IPFS Command Generator</h1>
       <ModeSelector @mode-change="handleModeChange" />
     </div>
-    <ExtractorMode v-if="currentMode === 'extractor'" />
-    <Cidv1Mode v-if="currentMode === 'cidv1'" />
-    <PinRetryMode v-if="currentMode === 'pinRetry'" />
-    <IpfsAddGeneratorMode v-if="currentMode === 'ipfsAddGenerator'" />
+    <ExtractorMode v-show="currentMode === 'extractor'" />
+    <Cidv1Mode v-show="currentMode === 'cidv1'" />
+    <PinRetryMode v-show="currentMode === 'pinRetry'" />
+    <IpfsAddGeneratorMode v-show="currentMode === 'ipfsAddGenerator'" />
   </div>
 </template>
 
