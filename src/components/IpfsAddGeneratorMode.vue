@@ -86,20 +86,3 @@
     event.target.select();
   };
   </script>
-  
-  <style scoped>
-  /* 在此处添加你的样式 */
-  .container {
-    /* 容器样式 */
-  }
-  
-  textarea {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  
-  .buttons button {
-    margin-right: 10px;
-  }
-  </style>
-  
