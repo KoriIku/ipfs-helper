@@ -8,7 +8,6 @@
     <Cidv1Mode v-if="currentMode === 'cidv1'" />
     <PinRetryMode v-if="currentMode === 'pinRetry'" />
     <IpfsAddGeneratorMode v-if="currentMode === 'ipfsAddGenerator'" />
-    <Readme />
   </div>
 </template>
 
@@ -19,7 +18,7 @@ import ExtractorMode from './components/ExtractorMode.vue'
 import Cidv1Mode from './components/Cidv1Mode.vue'
 import PinRetryMode from './components/PinRetryMode.vue'
 import IpfsAddGeneratorMode from './components/IpfsAddGeneratorMode.vue'
-import Readme from './components/Readme.vue'
+
 
 const currentMode = ref('extractor')
 
@@ -30,12 +29,16 @@ function handleModeChange(mode) {
 
 <style scoped>
 #app {
-  text-align: center; /* Center text and inline elements horizontally */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 水平居中对齐子项 */
+  justify-content: center; /* 垂直居中对齐子项 */
+  margin: 0; /* 清除默认边距 */
+  font-family: Arial, sans-serif; /* 设置字体 */
 }
 
 .centered-container {
-  display: inline-block; /* Adjust container to fit content and center it */
-  text-align: center; /* Center text and inline elements horizontally within container */
-  margin: 0 auto; /* Center the container itself horizontally */
+  text-align: center; /* 中心对齐文本 */
+  margin-bottom: 20px; /* 给内容下方添加间距 */
 }
 </style>
