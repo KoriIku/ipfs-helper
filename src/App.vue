@@ -4,10 +4,10 @@
       <h1>IPFS Command Generator</h1>
       <ModeSelector @mode-change="handleModeChange" />
     </div>
-    <ExtractorMode v-if="currentMode.value === 'extractor'" />
-    <Cidv1Mode v-if="currentMode.value === 'cidv1'" />
-    <PinRetryMode v-if="currentMode.value === 'pinRetry'" />
-    <IpfsAddGeneratorMode v-if="currentMode.value === 'ipfsAddGenerator'" />
+    <ExtractorMode v-if="currentMode === 'extractor'" />
+    <Cidv1Mode v-if="currentMode === 'cidv1'" />
+    <PinRetryMode v-if="currentMode === 'pinRetry'" />
+    <IpfsAddGeneratorMode v-if="currentMode === 'ipfsAddGenerator'" />
     <Readme />
   </div>
 </template>
@@ -29,7 +29,9 @@ function handleModeChange(mode) {
 </script>
 
 <style scoped>
-
+#app {
+  text-align: center; /* Center text and inline elements horizontally */
+}
 
 .centered-container {
   display: inline-block; /* Adjust container to fit content and center it */
