@@ -1,6 +1,6 @@
 <template>
   <select @change="onModeChange">
-    <option value="extractor">IPFS Command 提取器</option>
+    <option value="extractor">IPFS Command added提取器</option>
     <option value="cidv1">IPFS Command CID-v1 提取器</option>
     <option value="pinRetry">IPFS Remote Pin 重试器</option>
     <option value="ipfsAddGenerator">IPFS Add 生成器</option>
