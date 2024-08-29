@@ -1,76 +1,15 @@
-# ipfs-helper
+#Script Usage:
 
-This template should help get you started developing with Vue 3 in Vite.
+##Multipin.sh:
 
-## Recommended IDE Setup
+Execute: /path/to/multipin.sh
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Press Enter to input multiple lines of the command ```ipfs pin remote add --service=crust --background <cid>```, where <cid> can be either a file CID or a directory CID.
 
-## Customize configuration
+After entering the commands, press Ctrl+D to start executing them. You can run this in a screen session to keep it running in the background.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+##Multicheck.sh:
 
-## Project Setup
+Input one command per line: ```ipfs pin remote ls --service=<nickname> --cid=<cid> --status=pinned,pinning,failed,queued```
 
-```sh
-pnpm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-pnpm dev
-```
-
-### Compile and Minify for Production
-
-```sh
-pnpm build
-```
-
-# IPFS Command Helper WebTool
-
-This tool mainly generate commands for users to batch processing. which makes your life easier :)
-
-### Mode 1: IPFS Command Generator
-This mode accept user inputting as following format:
-```
-added <file cid 1> <folder name>/<file name 1>
-added <file cid 2> <folder name>/<file name 2>
-...
-added <file cid i> <folder name>/<file name i>
-added <folder cid> <folder name>
-```
-
-which, is the general output for a traditional ipfs-add command's stdout:
-```
-ipfs add --chunker=size-1048576 --raw-leaves --cid-version=1 -r --nocopy --to-files="/<folder_name_here>" <local_folder_path_here>
-```
-
-
-### Mode 2: IPFS CIDv1 Extractor
-This mode accept user inputting as the same format as mode 1.
-
-It will extract all cidv1(bafy cid) from added string.
-
-### Mode 3: IPFS Pin Command Generator.
-This mode accept user inputting as the same format as mode 1, in the first user input textbox.
-
-As for the second, it accepts a cid list.
-
-The output should be those cid generated commands which exists on those two textboxes.
-
-### Mode 4: IPFS added string Generator
-This mode is designed to rebuild the added string stdout output for mode 1-3 to use.
-
-The first user input textbox should be stdout for command like this:
-```
-ipfs files ls -l /
-```
-
-And the second user input textbox should be stdout for command like this:
-```
-ipfs files ls -l "/<folder_name_here>"
-```
-
-The output should be useable in mode 1-3.
+If the status returned is "pinned", it means the operation was successful. If it returns any other status or no status at all, it indicates a stalled chain state. You can manually upload via crustfiles.io or simply retry the Remote Pin to fix it.
