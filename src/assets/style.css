@@ -33,11 +33,11 @@
   }
 
   .buttons {
-    margin-top: 20px;
+    margin-top: 0px;
   }
 
   button {
-    margin: 0 10px;
+    margin-right: 20px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;

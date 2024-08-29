@@ -13,6 +13,11 @@
         v-model="inputCid"
         placeholder="Enter your CID list here (one per line)..."
       ></textarea>
+      <div class="buttons">
+        <button @click="generatePinRetry">Generate</button>
+        <button @click="clearOutput">Clear</button>
+        <button @click="copyOutput">Copy All</button>
+      </div>
       <div class="output-container">
         <textarea
           v-model="outputFilePin"
@@ -41,11 +46,7 @@
           @click="selectText($event)"
         ></textarea>
       </div>
-      <div class="buttons">
-        <button @click="generatePinRetry">Generate</button>
-        <button @click="clearOutput">Clear</button>
-        <button @click="copyOutput">Copy All</button>
-      </div>
+
     </div>
   </template>
   

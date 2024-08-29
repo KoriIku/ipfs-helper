@@ -22,6 +22,11 @@
       v-model="inputText"
       placeholder="Enter your input here..."
     ></textarea>
+    <div class="buttons">
+      <button @click="generateCommands">Generate</button>
+      <button @click="clearOutput">Clear</button>
+      <button @click="copyOutput">Copy All</button>
+    </div>
     <div class="output-container">
       <textarea
         v-model="mkdirCommands"
@@ -106,11 +111,7 @@
       readonly
       @click="selectText($event)"
     ></textarea>
-    <div class="buttons">
-      <button @click="generateCommands">Generate</button>
-      <button @click="clearOutput">Clear</button>
-      <button @click="copyOutput">Copy All</button>
-    </div>
+
     <Readme/>
   </div>
 </template>
