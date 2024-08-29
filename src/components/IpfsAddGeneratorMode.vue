@@ -24,6 +24,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { generateAddCommandsLogic } from '../utils/generateAddCommands';
 
 const isVisible = ref(true); // 控制页面显示的状态
 
@@ -32,39 +33,14 @@ const filesInput = ref("");
 const outputAddCommands = ref("");
 
 const generateAddCommands = () => {
-  const folderLines = folderInput.value
-    .split("\n")
-    .filter((line) => line.trim() !== "");
-  const fileLines = filesInput.value
-    .split("\n")
-    .filter((line) => line.trim() !== "");
+  const result = generateAddCommandsLogic(folderInput.value, filesInput.value);
 
-  if (folderLines.length === 0 || fileLines.length === 0) {
-    alert("Please provide both folder and file inputs.");
+  if (!result.success) {
+    alert(result.message);
     return;
   }
 
-  const folderParts = folderLines[0].split(/\s+/);
-  let folderName = folderParts.slice(0, -2).join(" ").trim();
-  const folderCid = folderParts[folderParts.length - 2].trim();
-
-  // Remove trailing slash from folder name if it exists
-  if (folderName.endsWith("/")) {
-    folderName = folderName.slice(0, -1);
-  }
-
-  let output = "";
-
-  fileLines.forEach((line) => {
-    const fileParts = line.split(/\s+/);
-    const fileName = fileParts.slice(0, -2).join(" ").trim();
-    const fileCid = fileParts[fileParts.length - 2].trim();
-    output += `added ${fileCid} ${folderName}/${fileName}\n`;
-  });
-
-  output += `added ${folderCid} ${folderName}`;
-
-  outputAddCommands.value = output;
+  outputAddCommands.value = result.output;
 };
 
 const clearOutputAddCommands = () => {
