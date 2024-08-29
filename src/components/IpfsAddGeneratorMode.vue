@@ -24,7 +24,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { generateAddCommandsLogic } from '../utils/generateAddCommands';
+import { generateAddCommandsLogic } from "../utils/generateAddCommands";
 
 const isVisible = ref(true); // 控制页面显示的状态
 
