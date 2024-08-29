@@ -58,32 +58,5 @@ function copyOutput() {
 </script>
 
 <style scoped>
-.container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 800px;
-  margin: 20px auto;
-}
 
-.textarea {
-  width: 100%;
-  height: 150px;
-  margin: 10px 0;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.buttons {
-  margin-top: 20px;
-}
-
-button {
-  margin: 0 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
 </style>
