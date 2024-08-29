@@ -1,6 +1,6 @@
-#Script Usage:
+# Script Usage:
 
-##Multipin.sh:
+## Multipin.sh:
 
 Execute: /path/to/multipin.sh
 
@@ -8,7 +8,7 @@ Press Enter to input multiple lines of the command ```ipfs pin remote add --serv
 
 After entering the commands, press Ctrl+D to start executing them. You can run this in a screen session to keep it running in the background.
 
-##Multicheck.sh:
+## Multicheck.sh:
 
 Input one command per line: ```ipfs pin remote ls --service=<nickname> --cid=<cid> --status=pinned,pinning,failed,queued```
 
