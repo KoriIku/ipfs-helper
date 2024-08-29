@@ -20,43 +20,45 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 // Reactive variables
-const inputText = ref('');
-const outputText = ref('');
+const inputText = ref("");
+const outputText = ref("");
 
 // Method to extract CIDs from input
 function extractCids() {
-  const lines = inputText.value.trim().split('\n');
+  const lines = inputText.value.trim().split("\n");
   const cidRegex = /bafy[a-z0-9]+|bafk[a-z0-9]+/;
   const extractedCids = lines
-    .map(line => {
+    .map((line) => {
       const match = line.match(cidRegex);
-      return match ? match[0] : '';
+      return match ? match[0] : "";
     })
-    .filter(cid => cid !== '')
-    .join('\n');
+    .filter((cid) => cid !== "")
+    .join("\n");
   outputText.value = extractedCids;
 }
 
 // Method to clear the output text area
 function clearOutput() {
-  outputText.value = '';
+  outputText.value = "";
 }
 
 // Method to copy output text to clipboard
 function copyOutput() {
-  navigator.clipboard.writeText(outputText.value.trim())
+  navigator.clipboard
+    .writeText(outputText.value.trim())
     .then(() => {
-      alert('内容已复制到剪贴板');
+      ElMessage({
+        message: "复制成功",
+        type: "success",
+      });
     })
-    .catch(err => {
-      console.error('复制失败:', err);
+    .catch((err) => {
+      console.error("复制失败:", err);
     });
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

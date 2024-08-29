@@ -256,10 +256,15 @@ function copyOutput() {
     folderPinCommand.value,
     filePinStatusCommands.value,
     folderPinStatusCommands.value,
-  ].join("\n\n");
+  ]
+    .filter((command) => command.trim() !== "") // 过滤掉空字符串
+    .join("\n");
 
   navigator.clipboard.writeText(allOutput).then(() => {
-    alert("All output copied to clipboard!");
+    ElMessage({
+      message: "复制成功",
+      type: "success",
+    });
   });
 }
 
