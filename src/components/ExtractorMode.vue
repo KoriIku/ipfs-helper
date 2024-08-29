@@ -111,27 +111,13 @@
       <button @click="clearOutput">Clear</button>
       <button @click="copyOutput">Copy All</button>
     </div>
-    <div class="readme">
-      <h2>README</h2>
-      <p><mark>Version: 2024-08-12</mark></p>
-      <p>The terminal command should be:</p>
-      <pre><code>ipfs add -r -n --cid-version=1 &lt;folder path&gt;</code></pre>
-      <p>
-        If you have enough disk space, for better experience, you can actually
-        add the folder to the IPFS network:
-      </p>
-      <pre><code>ipfs add -r --cid-version=1 &lt;folder path&gt;</code></pre>
-      <p>This tool accepts input in the following format:</p>
-      <pre><code>added &lt;cid1&gt; &lt;folder name&gt;/&lt;file name1&gt;
-  added &lt;cid2&gt; &lt;folder name&gt;/&lt;file name2&gt;
-  ...
-  added &lt;folder cid&gt; &lt;folder name&gt;</code></pre>
-    </div>
+    <Readme/>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import Readme from './Readme.vue'
 
 const gatewayDomain = ref("gateway.crustgateway.com");
 const serviceNickname = ref("crust");
