@@ -73,13 +73,13 @@ const clearOutputAddCommands = () => {
   outputAddCommands.value = "";
 };
 
-const copyOutputAddCommands = () => {
-  const textarea = document.createElement("textarea");
-  textarea.value = outputAddCommands.value;
-  document.body.appendChild(textarea);
-  textarea.select();
-  document.execCommand("copy");
-  document.body.removeChild(textarea);
+const copyOutputAddCommands = async () => {
+  try {
+    await navigator.clipboard.writeText(outputAddCommands.value);
+    console.log("Text copied to clipboard");
+  } catch (err) {
+    console.error("Failed to copy text: ", err);
+  }
 };
 
 const selectAll = (event) => {
