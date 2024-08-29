@@ -46,7 +46,6 @@
           @click="selectText($event)"
         ></textarea>
       </div>
-
     </div>
   </template>
   

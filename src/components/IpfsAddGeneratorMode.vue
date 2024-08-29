@@ -1,5 +1,5 @@
 <template>
-  <div id="ipfsAddGeneratorMode" class="container" v-show="isVisible">
+  <div id="ipfsAddGeneratorMode" class="container">
     <textarea
       v-model="folderInput"
       placeholder="输入ipfs files ls -l '/'获得的值..."
@@ -26,7 +26,7 @@
 import { ref } from "vue";
 import { generateAddCommandsLogic } from "../utils/generateAddCommands";
 
-const isVisible = ref(true); // 控制页面显示的状态
+
 
 const folderInput = ref("");
 const filesInput = ref("");
@@ -52,8 +52,13 @@ const clearOutputAddCommands = () => {
 const copyOutputAddCommands = async () => {
   try {
     await navigator.clipboard.writeText(outputAddCommands.value);
+    ElMessage({
+      message: "复制成功",
+      type: "success",
+    });
     console.log("Text copied to clipboard");
   } catch (err) {
+    ElMessage.error('复制失败')
     console.error("Failed to copy text: ", err);
   }
 };

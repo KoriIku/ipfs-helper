@@ -27,98 +27,86 @@
       <button @click="clearOutput">Clear</button>
       <button @click="copyOutput">Copy All</button>
     </div>
-    <div class="output-container">
+    <div id="extractorMode" class="container" @click="handleTextClick">
+      <div class="output-container">
+        <textarea
+          v-model="mkdirCommands"
+          placeholder="mkdir commands will be shown here..."
+          readonly
+        ></textarea>
+        <textarea
+          v-model="cpCommands"
+          placeholder="cp commands will be shown here..."
+          readonly
+        ></textarea>
+      </div>
+      <div class="output-container">
+        <textarea
+          v-model="lsCommand"
+          placeholder="ls command will be shown here..."
+          readonly
+        ></textarea>
+        <textarea
+          v-model="fileCIDs"
+          placeholder="File CID list will be shown here..."
+          readonly
+        ></textarea>
+        <textarea
+          v-model="folderCIDs"
+          placeholder="Folder CID list will be shown here..."
+          readonly
+        ></textarea>
+      </div>
       <textarea
-        v-model="mkdirCommands"
-        placeholder="mkdir commands will be shown here..."
+        v-model="gatewayURLs"
+        placeholder="Gateway URLs will be shown here..."
         readonly
-        @click="selectText($event)"
       ></textarea>
       <textarea
-        v-model="cpCommands"
-        placeholder="cp commands will be shown here..."
+        v-model="folderGatewayURLs"
+        placeholder="Folder Gateway URLs will be shown here..."
         readonly
-        @click="selectText($event)"
+      ></textarea>
+      <textarea
+        v-model="fileBase32Commands"
+        placeholder="File CID Base32 conversion commands will be shown here..."
+        readonly
+      ></textarea>
+      <textarea
+        v-model="folderBase32Commands"
+        placeholder="Folder CID Base32 conversion commands will be shown here..."
+        readonly
+      ></textarea>
+      <div class="output-container">
+        <textarea
+          v-model="filePinCommands"
+          placeholder="File CID pin commands will be shown here..."
+          readonly
+        ></textarea>
+        <textarea
+          v-model="folderPinCommand"
+          placeholder="Folder CID pin command will be shown here..."
+          readonly
+        ></textarea>
+      </div>
+      <textarea
+        v-model="filePinStatusCommands"
+        placeholder="File CID pin status check commands will be shown here..."
+        readonly
+      ></textarea>
+      <textarea
+        v-model="folderPinStatusCommands"
+        placeholder="Folder CID pin status check commands will be shown here..."
+        readonly
       ></textarea>
     </div>
-    <div class="output-container">
-      <textarea
-        v-model="lsCommand"
-        placeholder="ls command will be shown here..."
-        readonly
-        @click="selectText($event)"
-      ></textarea>
-      <textarea
-        v-model="fileCIDs"
-        placeholder="File CID list will be shown here..."
-        readonly
-        @click="selectText($event)"
-      ></textarea>
-      <textarea
-        v-model="folderCIDs"
-        placeholder="Folder CID list will be shown here..."
-        readonly
-        @click="selectText($event)"
-      ></textarea>
-    </div>
-    <textarea
-      v-model="gatewayURLs"
-      placeholder="Gateway URLs will be shown here..."
-      readonly
-      @click="selectText($event)"
-    ></textarea>
-    <textarea
-      v-model="folderGatewayURLs"
-      placeholder="Folder Gateway URLs will be shown here..."
-      readonly
-      @click="selectText($event)"
-    ></textarea>
-    <textarea
-      v-model="fileBase32Commands"
-      placeholder="File CID Base32 conversion commands will be shown here..."
-      readonly
-      @click="selectText($event)"
-    ></textarea>
-    <textarea
-      v-model="folderBase32Commands"
-      placeholder="Folder CID Base32 conversion commands will be shown here..."
-      readonly
-      @click="selectText($event)"
-    ></textarea>
-    <div class="output-container">
-      <textarea
-        v-model="filePinCommands"
-        placeholder="File CID pin commands will be shown here..."
-        readonly
-        @click="selectText($event)"
-      ></textarea>
-      <textarea
-        v-model="folderPinCommand"
-        placeholder="Folder CID pin command will be shown here..."
-        readonly
-        @click="selectText($event)"
-      ></textarea>
-    </div>
-    <textarea
-      v-model="filePinStatusCommands"
-      placeholder="File CID pin status check commands will be shown here..."
-      readonly
-      @click="selectText($event)"
-    ></textarea>
-    <textarea
-      v-model="folderPinStatusCommands"
-      placeholder="Folder CID pin status check commands will be shown here..."
-      readonly
-      @click="selectText($event)"
-    ></textarea>
-
-    <Readme/>
+    <Readme />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import Readme from './Readme.vue'
+import Readme from "./Readme.vue";
 
 const gatewayDomain = ref("gateway.crustgateway.com");
 const serviceNickname = ref("crust");
@@ -275,8 +263,10 @@ function copyOutput() {
   });
 }
 
-function selectText(event) {
-  const textarea = event.target;
-  textarea.select();
+function handleTextClick(event) {
+  // 只处理 textarea 元素的点击事件
+  if (event.target.tagName === "TEXTAREA") {
+    event.target.select();
+  }
 }
 </script>
