@@ -27,6 +27,7 @@
   width: 100%;
   max-width: 800px;
   background-color: #f9f9f9;
+  box-sizing: border-box;
 }
 .readme h2 {
   margin-top: 0;

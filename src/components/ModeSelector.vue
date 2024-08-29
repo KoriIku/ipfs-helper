@@ -1,23 +1,20 @@
 <template>
-  <select @change="onModeChange">
-    <option value="extractor">IPFS Command added提取器</option>
-    <option value="cidv1">IPFS Command CID-v1 提取器</option>
-    <option value="pinRetry">IPFS Remote Pin 重试器</option>
-    <option value="ipfsAddGenerator">IPFS Add 生成器</option>
-  </select>
+  <el-radio-group v-model="selectedMode" size="large" fill="#409EFF" text-color="#ffffff">
+    <el-radio-button value="extractor">IPFS Command added提取器</el-radio-button>
+    <el-radio-button value="cidv1">IPFS Command CID-v1 提取器</el-radio-button>
+    <el-radio-button value="pinRetry">IPFS Remote Pin 重试器</el-radio-button>
+    <el-radio-button value="ipfsAddGenerator">IPFS Add 生成器</el-radio-button>
+  </el-radio-group>
 </template>
 
-<script>
-import { defineComponent } from "vue";
+<script setup>
+import { ref, watch, defineEmits } from 'vue';
 
-export default defineComponent({
-  emits: ["mode-change"],
-  setup(props, { emit }) {
-    function onModeChange(event) {
-      emit("mode-change", event.target.value);
-    }
+const selectedMode = ref('extractor');
+const emit = defineEmits(['mode-change']);
 
-    return { onModeChange };
-  },
+// 监听选中的值变化并发出事件
+watch(selectedMode, (newValue) => {
+  emit('mode-change', newValue);
 });
 </script>
